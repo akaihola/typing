@@ -3,7 +3,7 @@ from abc import abstractmethod, ABCMeta
 import unittest
 
 from typing import (
-    List, Dict, Set, Tuple, Pattern, BytesPattern, Match, BytesMatch, Any,
+    List, Dict, Set, Tuple, Pattern, Pattern, Match, Any,
     Function, Generic, AbstractGeneric, Protocol, Sized, Iterable, Iterator,
     Sequence, AbstractSet, Mapping, BinaryIO, TextIO, SupportsInt, SupportsFloat,
     SupportsAbs, Reversible, Undefined, cast, forwardref, overload, typevar
@@ -30,15 +30,15 @@ class TestTyping(unittest.TestCase):
 
     def test_Pattern(self):
         import re
-        self.assertIs(type(re.compile(u'')), Pattern)
-        self.assertIs(type(re.compile('')), BytesPattern)
+        self.assertIs(type(re.compile(u'')), Pattern[unicode])
+        self.assertIs(type(re.compile('')), Pattern[str])
         # Note that actually Pattern is the same as BytesPattern, which is
         # a bit awkward.
 
     def test_Match(self):
         import re
-        self.assertIs(type(re.match(u'', u'')), Match)
-        self.assertIs(type(re.match('', '')), BytesMatch)
+        self.assertIs(type(re.match(u'', u'')), Match[unicode])
+        self.assertIs(type(re.match('', '')), Match[str])
         # Note that actually Match is the same as BytesMatch, which is
         # a bit awkward.
 
